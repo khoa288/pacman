@@ -7,10 +7,22 @@
 */
 package pacman.game.model;
 
+import java.util.List;
+
 public class Game {
     private Grid grid;
     private PacMan pacMan;
     private Ghost[] ghosts;
+
+    public List<Dot> getDots() {
+        return dots;
+    }
+
+    public void setDots(List<Dot> dots) {
+        this.dots = dots;
+    }
+
+    private List<Dot> dots;
 
     public Game() {
         grid = new Grid();
