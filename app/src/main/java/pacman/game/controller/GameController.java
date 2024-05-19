@@ -24,4 +24,12 @@ public class GameController {
     public void draw(Graphics g) {
         // Draw the game state (PacMan, ghosts, grid, etc.)
     }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

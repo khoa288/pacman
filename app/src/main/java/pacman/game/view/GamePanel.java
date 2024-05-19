@@ -35,4 +35,8 @@ public class GamePanel extends JPanel implements ActionListener {
         gameController.update();
         repaint();
     }
+
+    public GameController getGameController() {
+        return gameController;
+    }
 }

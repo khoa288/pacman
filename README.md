@@ -1,4 +1,4 @@
-# Term Project  Pacman Game
+# Term Project - Pacman Game
 [![Test](https://github.com/khoa288/pacman/actions/workflows/test.yml/badge.svg)](https://github.com/khoa288/pacman/actions/workflows/test.yml)
 [![Build](https://github.com/khoa288/pacman/actions/workflows/build.yml/badge.svg)](https://github.com/khoa288/pacman/actions/workflows/build.yml)
 

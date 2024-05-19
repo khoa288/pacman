@@ -16,5 +16,29 @@ public class Grid {
         // Initialize grid with default layout or load from a file
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public char[][] getLayout() {
+        return layout;
+    }
+
+    public void setLayout(char[][] layout) {
+        this.layout = layout;
+    }
+
     // Methods to interact with grid
 }

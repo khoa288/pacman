@@ -22,5 +22,27 @@ public class Game {
         // Update game state: move PacMan, check collisions, etc.
     }
 
-    // Getters and other game logic methods
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(Grid grid) {
+        this.grid = grid;
+    }
+
+    public PacMan getPacMan() {
+        return pacMan;
+    }
+
+    public void setPacMan(PacMan pacMan) {
+        this.pacMan = pacMan;
+    }
+
+    public Ghost[] getGhosts() {
+        return ghosts;
+    }
+
+    public void setGhosts(Ghost[] ghosts) {
+        this.ghosts = ghosts;
+    }
 }
