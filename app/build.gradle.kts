@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 repositories {
@@ -40,4 +41,50 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+// Configure Spotless for code formatting
+spotless {
+    format("misc") {
+        // define the files to apply `misc` to
+        target("*.gradle", "*.md", ".gitignore")
+
+        // define the steps to apply to those files
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    java {
+        // Use the default importOrder configuration
+        importOrder()
+
+        // apply a specific flavor of google-java-format
+        googleJavaFormat("1.17.0").aosp().reflowLongStrings()
+
+        // fix formatting of type annotations
+        formatAnnotations()
+
+        // remove unused imports
+        removeUnusedImports()
+
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+
+        // make sure every file has the following copyright header.
+        // optionally, Spotless can set copyright years by digging
+        // through git history (see "license" section below)
+        licenseHeader(
+            """
+            /*
+              VinUniversity
+              Course: COMP1020 - Object-Oriented Programming & Data Structures
+              Semester: Spring 2024
+              Assessment: Term Project
+              Author: Team 3
+            */
+            """.trimIndent()
+        )
+    }
 }
