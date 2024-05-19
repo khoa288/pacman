@@ -13,7 +13,8 @@ public class PacMan {
     private int direction;
 
     public PacMan() {
-        // Initialize position and direction
+        x = 0;
+        y = 0;
     }
 
     public void move() {
