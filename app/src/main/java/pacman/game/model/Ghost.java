@@ -7,49 +7,57 @@
 */
 package pacman.game.model;
 
-public class Ghost {
-    private int x;
-    private int y;
-    private int direction;
-    private boolean frightened;
+import java.util.Random;
 
-    public Ghost() {
-        // Initialize position and direction
+public class Ghost {
+    public enum Type {
+        RED,
+        PINK,
+        BLUE,
+        ORANGE
     }
 
-    public void move() {
-        // Move logic based on direction
+    private int x, y;
+    private Grid grid;
+    private Random random;
+    private Type type;
+
+    public Ghost(int x, int y, Grid grid, Type type) {
+        this.x = x;
+        this.y = y;
+        this.grid = grid;
+        this.random = new Random();
+        this.type = type;
     }
 
     public int getX() {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void move() {
+        // Simple random movement logic for ghost
+        int direction = random.nextInt(4);
+        switch (direction) {
+            case 0:
+                if (grid.isValidMove(x, y - 1)) y--; // Move up
+                break;
+            case 1:
+                if (grid.isValidMove(x, y + 1)) y++; // Move down
+                break;
+            case 2:
+                if (grid.isValidMove(x - 1, y)) x--; // Move left
+                break;
+            case 3:
+                if (grid.isValidMove(x + 1, y)) x++; // Move right
+                break;
+        }
     }
 
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
-    public boolean isFrightened() {
-        return frightened;
-    }
-
-    public void setFrightened(boolean frightened) {
-        this.frightened = frightened;
+    public Type getType() {
+        return type;
     }
 }

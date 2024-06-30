@@ -8,16 +8,21 @@
 package pacman.game.view;
 
 import javax.swing.JFrame;
+import pacman.game.controller.GameController;
+import pacman.game.model.Game;
 
 public class MainFrame extends JFrame {
     public MainFrame() {
+        Game game = new Game();
+        GamePanel gamePanel = new GamePanel(game);
+        add(gamePanel);
+
+        GameController controller = new GameController(game, gamePanel);
+        addKeyListener(controller);
+
         setTitle("Pac-Man Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        pack();
         setLocationRelativeTo(null);
-
-        add(new GamePanel());
-
-        setVisible(true);
     }
 }

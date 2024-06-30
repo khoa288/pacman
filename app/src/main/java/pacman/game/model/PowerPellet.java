@@ -7,10 +7,29 @@
 */
 package pacman.game.model;
 
-public class PowerPellet extends Dot {
+public class PowerPellet {
+    private int x, y;
+    private boolean eaten;
+
     public PowerPellet(int x, int y) {
-        super(x, y);
+        this.x = x;
+        this.y = y;
+        this.eaten = false;
     }
 
-    // Additional methods for power pellet behavior
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public boolean isEaten() {
+        return eaten;
+    }
+
+    public void eat() {
+        this.eaten = true;
+    }
 }

@@ -8,40 +8,49 @@
 package pacman.game.model;
 
 public class PacMan {
-    private int x;
-    private int y;
-    private int direction;
+    private int x, y;
+    private Grid grid;
 
-    public PacMan() {
-        x = 0;
-        y = 0;
-    }
-
-    public void move() {
-        // Move logic based on direction
+    public PacMan(int startX, int startY, Grid grid) {
+        this.x = startX;
+        this.y = startY;
+        this.grid = grid;
     }
 
     public int getX() {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public void moveUp() {
+        if (grid.isValidMove(x, y - 1)) y--;
     }
 
-    public int getDirection() {
-        return direction;
+    public void moveDown() {
+        if (grid.isValidMove(x, y + 1)) y++;
     }
 
-    public void setDirection(int direction) {
-        this.direction = direction;
+    public void moveLeft() {
+        if (grid.isValidMove(x - 1, y)) x--;
+    }
+
+    public void moveRight() {
+        if (grid.isValidMove(x + 1, y)) x++;
+    }
+
+    public void eatDots() {
+        Dot dot = grid.getDot(x, y);
+        if (dot != null && !dot.isEaten()) {
+            dot.eat();
+        }
+
+        PowerPellet powerPellet = grid.getPowerPellet(x, y);
+        if (powerPellet != null && !powerPellet.isEaten()) {
+            powerPellet.eat();
+            // Handle power pellet effect
+        }
     }
 }

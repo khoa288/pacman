@@ -7,54 +7,66 @@
 */
 package pacman.game.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private Grid grid;
     private PacMan pacMan;
-    private Ghost[] ghosts;
-
-    public List<Dot> getDots() {
-        return dots;
-    }
-
-    public void setDots(List<Dot> dots) {
-        this.dots = dots;
-    }
-
-    private List<Dot> dots;
+    private List<Ghost> ghosts;
+    private Grid grid;
+    private int score;
 
     public Game() {
-        grid = new Grid();
-        pacMan = new PacMan();
-        ghosts = new Ghost[] {new Ghost(), new Ghost(), new Ghost(), new Ghost()}; // Four ghosts
+        grid = new Grid(21, 21);
+        pacMan = new PacMan(10, 15, grid);
+        ghosts = new ArrayList<>();
+        ghosts.add(new Ghost(10, 9, grid, Ghost.Type.RED));
+        ghosts.add(new Ghost(10, 10, grid, Ghost.Type.PINK));
+        ghosts.add(new Ghost(10, 11, grid, Ghost.Type.BLUE));
+        ghosts.add(new Ghost(10, 12, grid, Ghost.Type.ORANGE));
+        score = 0;
+    }
+
+    public void movePacManUp() {
+        pacMan.moveUp();
+    }
+
+    public void movePacManDown() {
+        pacMan.moveDown();
+    }
+
+    public void movePacManLeft() {
+        pacMan.moveLeft();
+    }
+
+    public void movePacManRight() {
+        pacMan.moveRight();
     }
 
     public void update() {
-        // Update game state: move PacMan, check collisions, etc.
-    }
-
-    public Grid getGrid() {
-        return grid;
-    }
-
-    public void setGrid(Grid grid) {
-        this.grid = grid;
+        pacMan.eatDots();
+        for (Ghost ghost : ghosts) {
+            ghost.move();
+            if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
+                // Handle collision with ghosts
+            }
+        }
+        score = grid.getRemainingDots();
     }
 
     public PacMan getPacMan() {
         return pacMan;
     }
 
-    public void setPacMan(PacMan pacMan) {
-        this.pacMan = pacMan;
-    }
-
-    public Ghost[] getGhosts() {
+    public List<Ghost> getGhosts() {
         return ghosts;
     }
 
-    public void setGhosts(Ghost[] ghosts) {
-        this.ghosts = ghosts;
+    public Grid getGrid() {
+        return grid;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

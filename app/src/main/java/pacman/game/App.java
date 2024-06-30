@@ -7,10 +7,15 @@
 */
 package pacman.game;
 
+import javax.swing.SwingUtilities;
 import pacman.game.view.MainFrame;
 
 public class App {
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(MainFrame::new);
+        SwingUtilities.invokeLater(
+                () -> {
+                    MainFrame mainFrame = new MainFrame();
+                    mainFrame.setVisible(true);
+                });
     }
 }

@@ -7,29 +7,37 @@
 */
 package pacman.game.controller;
 
-import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import pacman.game.model.Game;
+import pacman.game.view.GamePanel;
 
-public class GameController {
+public class GameController extends KeyAdapter {
     private Game game;
+    private GamePanel gamePanel;
 
-    public GameController() {
-        game = new Game();
-    }
-
-    public void update() {
-        game.update();
-    }
-
-    public void draw(Graphics g) {
-        // Draw the game state (PacMan, ghosts, grid, etc.)
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
+    public GameController(Game game, GamePanel gamePanel) {
         this.game = game;
+        this.gamePanel = gamePanel;
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                game.movePacManUp();
+                break;
+            case KeyEvent.VK_DOWN:
+                game.movePacManDown();
+                break;
+            case KeyEvent.VK_LEFT:
+                game.movePacManLeft();
+                break;
+            case KeyEvent.VK_RIGHT:
+                game.movePacManRight();
+                break;
+        }
+        game.update();
+        gamePanel.repaint();
     }
 }
