@@ -17,13 +17,13 @@ public class Game {
     private int score;
 
     public Game() {
-        grid = new Grid(21, 21);
+        grid = new Grid();
         pacMan = new PacMan(10, 15, grid);
         ghosts = new ArrayList<>();
-        ghosts.add(new Ghost(10, 9, grid, Ghost.Type.RED));
-        ghosts.add(new Ghost(10, 10, grid, Ghost.Type.PINK));
-        ghosts.add(new Ghost(10, 11, grid, Ghost.Type.BLUE));
-        ghosts.add(new Ghost(10, 12, grid, Ghost.Type.ORANGE));
+        ghosts.add(new Ghost(grid, Ghost.Type.RED));
+        ghosts.add(new Ghost(grid, Ghost.Type.PINK));
+        ghosts.add(new Ghost(grid, Ghost.Type.BLUE));
+        ghosts.add(new Ghost(grid, Ghost.Type.ORANGE));
         score = 0;
     }
 
@@ -43,10 +43,20 @@ public class Game {
         pacMan.moveRight();
     }
 
+    //    public void update() {
+    //        pacMan.eatDots();
+    //        for (Ghost ghost : ghosts) {
+    //            ghost.move();
+    //            if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
+    //                // Handle collision with ghosts
+    //            }
+    //        }
+    //        score = grid.getRemainingDots();
+    //    }
     public void update() {
         pacMan.eatDots();
         for (Ghost ghost : ghosts) {
-            ghost.move();
+            ghost.move(pacMan);
             if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
                 // Handle collision with ghosts
             }
