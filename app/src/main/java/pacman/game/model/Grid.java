@@ -55,15 +55,9 @@ public class Grid {
                 if (c == '#') {
                     walls[i][j] = 1;
                 } else if (c == ' ') {
-                    //                    dots[i][j] = new Dot(i, j);
+                    // dots[i][j] = new Dot(i, j);
                 }
             }
-        }
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                System.out.print(walls[i][j] + " ");
-            }
-            System.out.println();
         }
     }
 

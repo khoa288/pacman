@@ -10,34 +10,31 @@ package pacman.game.controller;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import pacman.game.model.Game;
-import pacman.game.view.GamePanel;
+import pacman.game.model.PacMan;
 
 public class GameController extends KeyAdapter {
     private Game game;
-    private GamePanel gamePanel;
 
-    public GameController(Game game, GamePanel gamePanel) {
+    public GameController(Game game) {
         this.game = game;
-        this.gamePanel = gamePanel;
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        PacMan pacMan = game.getPacMan();
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                game.movePacManUp();
+                pacMan.setDirection(PacMan.Direction.UP);
                 break;
             case KeyEvent.VK_DOWN:
-                game.movePacManDown();
+                pacMan.setDirection(PacMan.Direction.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
-                game.movePacManLeft();
+                pacMan.setDirection(PacMan.Direction.LEFT);
                 break;
             case KeyEvent.VK_RIGHT:
-                game.movePacManRight();
+                pacMan.setDirection(PacMan.Direction.RIGHT);
                 break;
         }
-        game.update();
-        gamePanel.repaint();
     }
 }

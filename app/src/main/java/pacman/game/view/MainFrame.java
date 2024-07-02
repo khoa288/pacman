@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
         GamePanel gamePanel = new GamePanel(game);
         add(gamePanel);
 
-        GameController controller = new GameController(game, gamePanel);
+        GameController controller = new GameController(game);
         addKeyListener(controller);
 
         setTitle("Pac-Man Game");
