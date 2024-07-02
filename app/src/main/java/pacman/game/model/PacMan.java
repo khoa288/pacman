@@ -86,7 +86,7 @@ public class PacMan {
         if (powerPellet != null && !powerPellet.isEaten()) {
             powerPellet.eat();
             scoreIncrement = 3;
-
+            // Handle power pellet effect
         }
 
         return scoreIncrement;

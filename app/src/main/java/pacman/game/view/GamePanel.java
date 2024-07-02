@@ -64,9 +64,7 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (game.getGrid().getRemainingDots() == 0) {
-            drawWinScreen(g);
-        } else if (game.isGameOver()) {
+        if (game.isGameOver()) {
             drawGameOverScreen(g);
         } else {
             drawGrid(g);
@@ -150,14 +148,5 @@ public class GamePanel extends JPanel {
         int scoreWidth = g.getFontMetrics().stringWidth(scoreText);
         g.drawString(gameOverText, getWidth() / 2 - gameOverWidth / 2, getHeight() / 2 - 24);
         g.drawString(scoreText, getWidth() / 2 - scoreWidth / 2, getHeight() / 2 + 24);
-    }
-
-    private void drawWinScreen(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", Font.BOLD, 30));
-        g.drawString("Congratulations!", 100, 200);
-        g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString("You won the game!", 130, 240);
-        g.drawString("Score: " + game.getScore(), 160, 280);
     }
 }
