@@ -7,10 +7,8 @@
 */
 package pacman.game.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 import pacman.game.model.Dot;
 import pacman.game.model.Game;
 import pacman.game.model.Ghost;
@@ -19,21 +17,50 @@ import pacman.game.model.PowerPellet;
 
 public class GamePanel extends JPanel {
     private Game game;
+    private boolean chaseMode;
+    private Timer normalModeTimer;
+    private Timer chaseModeTimer;
 
     public GamePanel(Game game) {
         this.game = game;
+        this.chaseMode = false;
         setPreferredSize(new Dimension(420, 420));
         setBackground(Color.BLACK);
+
+        // Initialize timers
+        initializeTimers();
+        normalModeTimer.start();
+    }
+
+    private void initializeTimers() {
+        normalModeTimer = new Timer(20000, e -> switchToChaseMode());
+        chaseModeTimer = new Timer(10000 + (int) (Math.random() * 5000), e -> switchToNormalMode());
+    }
+
+    private void switchToChaseMode() {
+        chaseMode = true;
+        normalModeTimer.stop();
+        chaseModeTimer.start();
+    }
+
+    private void switchToNormalMode() {
+        chaseMode = false;
+        chaseModeTimer.stop();
+        normalModeTimer.start();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawGrid(g);
-        drawDots(g);
-        drawPowerPellets(g);
-        drawPacMan(g);
-        drawGhosts(g);
+        if (game.isGameOver()) {
+            drawGameOverScreen(g);
+        } else {
+            drawGrid(g);
+            drawDots(g);
+            drawPowerPellets(g);
+            drawPacMan(g);
+            drawGhosts(g);
+        }
     }
 
     private void drawGrid(Graphics g) {
@@ -95,6 +122,26 @@ public class GamePanel extends JPanel {
                     break;
             }
             g.fillOval(ghost.getX() * 20, ghost.getY() * 20, 20, 20);
+
+            // Update ghost movement based on mode
+            if (chaseMode) {
+                ghost.moveChaseMode(game.getPacMan());
+            } else {
+                ghost.moveNormalMode();
+            }
         }
+    }
+
+    private void drawGameOverScreen(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 24));
+        String gameOverText = "Game Over";
+        String scoreText = "Score: " + game.getScore();
+        int gameOverWidth = g.getFontMetrics().stringWidth(gameOverText);
+        int scoreWidth = g.getFontMetrics().stringWidth(scoreText);
+        g.drawString(gameOverText, getWidth() / 2 - gameOverWidth / 2, getHeight() / 2 - 24);
+        g.drawString(scoreText, getWidth() / 2 - scoreWidth / 2, getHeight() / 2 + 24);
     }
 }

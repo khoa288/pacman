@@ -55,7 +55,7 @@ public class Grid {
                 if (c == '#') {
                     walls[i][j] = 1;
                 } else if (c == ' ') {
-//                    dots[i][j] = new Dot(i, j);
+                    //                    dots[i][j] = new Dot(i, j);
                 }
             }
         }
@@ -66,8 +66,6 @@ public class Grid {
             System.out.println();
         }
     }
-
-
 
     public Dot getDot(int x, int y) {
         if (x >= 0 && x < dots.length && y >= 0 && y < dots[0].length) {
