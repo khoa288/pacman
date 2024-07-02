@@ -17,7 +17,6 @@ public class Game {
     private int score;
     private boolean gameOver;
 
-
     public Game() {
         grid = new Grid();
         pacMan = new PacMan(10, 15, grid);
@@ -64,7 +63,7 @@ public class Game {
 
         pacMan.eatDots();
         for (Ghost ghost : ghosts) {
-//            ghost.move(pacMan, chaseMode);
+            //            ghost.move(pacMan, chaseMode);
             if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
                 handleCollision();
                 return;
@@ -76,6 +75,7 @@ public class Game {
     public boolean isGameOver() {
         return gameOver;
     }
+
     private boolean pacManAteAllDots() {
         return grid.getRemainingDots() == 0;
     }
