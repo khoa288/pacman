@@ -46,7 +46,7 @@ public class GamePanel extends JPanel {
 
     private void initializeTimers() {
         normalModeTimer = new Timer(20000, e -> switchToChaseMode());
-        chaseModeTimer = new Timer(10000 + (int) (Math.random() * 5000), e -> switchToNormalMode());
+        chaseModeTimer = new Timer(5000 + (int) (Math.random() * 5000), e -> switchToNormalMode());
     }
 
     private void switchToChaseMode() {

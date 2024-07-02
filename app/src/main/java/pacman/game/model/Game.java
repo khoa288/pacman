@@ -52,8 +52,8 @@ public class Game {
         }
 
         pacMan.move();
-        pacMan.eatDots();
-
+        int scoreIncrement = pacMan.eatDots();
+        score += scoreIncrement;
         for (Ghost ghost : ghosts) {
             if (chaseMode) {
                 ghost.moveChaseMode(pacMan);
@@ -65,8 +65,10 @@ public class Game {
                 return;
             }
         }
-
-        score = grid.getRemainingDots();
+        if (grid.getRemainingDots() == 0) {
+            // Pacman has eaten all dots
+            endGame(); // Stop the game when all dots are eaten
+        }
     }
 
     public boolean isGameOver() {
