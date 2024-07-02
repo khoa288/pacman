@@ -136,7 +136,7 @@ public class Ghost {
     //        }
     //    }
 
-    public void move(PacMan pacMan) {
+    public void moveChaseMode(PacMan pacMan) {
         int targetX = pacMan.getX();
         int targetY = pacMan.getY();
 
@@ -161,6 +161,25 @@ public class Ghost {
             int[] nextMove = path.get(0);
             x = nextMove[0];
             y = nextMove[1];
+        }
+    }
+
+    public void moveNormalMode() {
+        // Simple random movement logic for ghost
+        int direction = random.nextInt(4);
+        switch (direction) {
+            case 0:
+                if (grid.isValidMove(x, y - 1)) y--; // Move up
+                break;
+            case 1:
+                if (grid.isValidMove(x, y + 1)) y++; // Move down
+                break;
+            case 2:
+                if (grid.isValidMove(x - 1, y)) x--; // Move left
+                break;
+            case 3:
+                if (grid.isValidMove(x + 1, y)) x++; // Move right
+                break;
         }
     }
 }

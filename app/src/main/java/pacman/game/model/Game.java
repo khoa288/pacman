@@ -15,6 +15,7 @@ public class Game {
     private List<Ghost> ghosts;
     private Grid grid;
     private int score;
+    private boolean gameOver;
 
     public Game() {
         grid = new Grid();
@@ -25,6 +26,7 @@ public class Game {
         ghosts.add(new Ghost(grid, Ghost.Type.BLUE));
         ghosts.add(new Ghost(grid, Ghost.Type.ORANGE));
         score = 0;
+        gameOver = false;
     }
 
     public void movePacManUp() {
@@ -54,14 +56,36 @@ public class Game {
     //        score = grid.getRemainingDots();
     //    }
     public void update() {
+        if (pacManAteAllDots()) {
+            endGame();
+            return;
+        }
+
         pacMan.eatDots();
         for (Ghost ghost : ghosts) {
-            ghost.move(pacMan);
+            //            ghost.move(pacMan, chaseMode);
             if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
-                // Handle collision with ghosts
+                handleCollision();
+                return;
             }
         }
         score = grid.getRemainingDots();
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    private boolean pacManAteAllDots() {
+        return grid.getRemainingDots() == 0;
+    }
+
+    private void handleCollision() {
+        endGame();
+    }
+
+    private void endGame() {
+        gameOver = true;
     }
 
     public PacMan getPacMan() {
