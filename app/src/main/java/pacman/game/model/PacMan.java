@@ -11,6 +11,8 @@ public class PacMan {
     private int x, y;
     private Grid grid;
     private Direction direction;
+    private int moveCounter;
+    private int moveFrequency; // Number of updates before moving
 
     public enum Direction {
         UP,
@@ -24,13 +26,8 @@ public class PacMan {
         this.y = startY;
         this.grid = grid;
         this.direction = Direction.RIGHT; // Default direction
+        this.moveFrequency = 9; // Adjust this value to change speed
     }
-
-    //    public PacMan(int startX, int startY, Grid grid) {
-    //        this.x = startX;
-    //        this.y = startY;
-    //        this.grid = grid;
-    //    }
 
     public Direction getDirection() {
         return direction;
@@ -44,31 +41,36 @@ public class PacMan {
         return y;
     }
 
-    public void moveUp() {
-        if (grid.isValidMove(x, y - 1)) {
-            y--;
-            direction = Direction.UP;
-        }
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
-    public void moveDown() {
-        if (grid.isValidMove(x, y + 1)) {
-            y++;
-            direction = Direction.DOWN;
-        }
-    }
-
-    public void moveLeft() {
-        if (grid.isValidMove(x - 1, y)) {
-            x--;
-            direction = Direction.LEFT;
-        }
-    }
-
-    public void moveRight() {
-        if (grid.isValidMove(x + 1, y)) {
-            x++;
-            direction = Direction.RIGHT;
+    public void move() {
+        moveCounter++;
+        if (moveCounter >= moveFrequency) {
+            moveCounter = 0;
+            switch (direction) {
+                case UP:
+                    if (grid.isValidMove(x, y - 1)) {
+                        y--;
+                    }
+                    break;
+                case DOWN:
+                    if (grid.isValidMove(x, y + 1)) {
+                        y++;
+                    }
+                    break;
+                case LEFT:
+                    if (grid.isValidMove(x - 1, y)) {
+                        x--;
+                    }
+                    break;
+                case RIGHT:
+                    if (grid.isValidMove(x + 1, y)) {
+                        x++;
+                    }
+                    break;
+            }
         }
     }
 

@@ -20,6 +20,7 @@ public class GamePanel extends JPanel {
     private boolean chaseMode;
     private Timer normalModeTimer;
     private Timer chaseModeTimer;
+    private Timer gameUpdateTimer; // Add game update timer
 
     public GamePanel(Game game) {
         this.game = game;
@@ -30,6 +31,17 @@ public class GamePanel extends JPanel {
         // Initialize timers
         initializeTimers();
         normalModeTimer.start();
+
+        // Initialize and start game update timer
+        int gameUpdateInterval = 1000 / 60; // 60 updates per second
+        gameUpdateTimer =
+                new Timer(
+                        gameUpdateInterval,
+                        e -> {
+                            game.update(chaseMode); // Pass chaseMode to update method
+                            repaint();
+                        });
+        gameUpdateTimer.start();
     }
 
     private void initializeTimers() {
@@ -122,13 +134,6 @@ public class GamePanel extends JPanel {
                     break;
             }
             g.fillOval(ghost.getX() * 20, ghost.getY() * 20, 20, 20);
-
-            // Update ghost movement based on mode
-            if (chaseMode) {
-                ghost.moveChaseMode(game.getPacMan());
-            } else {
-                ghost.moveNormalMode();
-            }
         }
     }
 

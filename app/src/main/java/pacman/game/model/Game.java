@@ -30,45 +30,42 @@ public class Game {
     }
 
     public void movePacManUp() {
-        pacMan.moveUp();
+        pacMan.setDirection(PacMan.Direction.UP);
     }
 
     public void movePacManDown() {
-        pacMan.moveDown();
+        pacMan.setDirection(PacMan.Direction.DOWN);
     }
 
     public void movePacManLeft() {
-        pacMan.moveLeft();
+        pacMan.setDirection(PacMan.Direction.LEFT);
     }
 
     public void movePacManRight() {
-        pacMan.moveRight();
+        pacMan.setDirection(PacMan.Direction.RIGHT);
     }
 
-    //    public void update() {
-    //        pacMan.eatDots();
-    //        for (Ghost ghost : ghosts) {
-    //            ghost.move();
-    //            if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
-    //                // Handle collision with ghosts
-    //            }
-    //        }
-    //        score = grid.getRemainingDots();
-    //    }
-    public void update() {
+    public void update(boolean chaseMode) {
         if (pacManAteAllDots()) {
             endGame();
             return;
         }
 
+        pacMan.move();
         pacMan.eatDots();
+
         for (Ghost ghost : ghosts) {
-            //            ghost.move(pacMan, chaseMode);
+            if (chaseMode) {
+                ghost.moveChaseMode(pacMan);
+            } else {
+                ghost.moveNormalMode();
+            }
             if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
                 handleCollision();
                 return;
             }
         }
+
         score = grid.getRemainingDots();
     }
 
