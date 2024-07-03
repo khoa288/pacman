@@ -160,4 +160,14 @@ public class GamePanel extends JPanel {
         g.drawString("You won the game!", 130, 240);
         g.drawString("Score: " + game.getScore(), 160, 280);
     }
+    private void drawLeaderboard(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Leaderboard", 150, 100);
+        java.util.List<Integer> topScores = leaderboard.getTopScores(10);
+        for (int i = 0; i < topScores.size(); i++) {
+            g.setFont(new Font("Arial", Font.PLAIN, 20));
+            g.drawString((i + 1) + ". " + topScores.get(i), 180, 150 + i * 30);
+        }
+    }
 }
