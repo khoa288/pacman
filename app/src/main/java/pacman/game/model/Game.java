@@ -61,7 +61,7 @@ public class Game {
                 ghost.moveNormalMode();
             }
             if (ghost.getX() == pacMan.getX() && ghost.getY() == pacMan.getY()) {
-                gameOver = true;
+                handleCollision();
                 return;
             }
         }
