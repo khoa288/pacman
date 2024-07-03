@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
     private boolean chaseMode;
     private Timer normalModeTimer;
     private Timer chaseModeTimer;
-    private Timer gameUpdateTimer; // Add game update timer
+    private Timer gameUpdateTimer;
 
     public GamePanel(Game game) {
         this.game = game;
@@ -93,7 +93,7 @@ public class GamePanel extends JPanel {
         for (int i = 0; i < game.getGrid().dots.length; i++) {
             for (int j = 0; j < game.getGrid().dots[i].length; j++) {
                 Dot dot = game.getGrid().getDot(i, j);
-                if (!dot.isEaten()) {
+                if (dot != null && !dot.isEaten()) {
                     g.setColor(Color.YELLOW);
                     g.fillOval(dot.getX() * 20 + 8, dot.getY() * 20 + 8, 4, 4);
                 }
