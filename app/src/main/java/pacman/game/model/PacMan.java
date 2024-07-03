@@ -25,7 +25,7 @@ public class PacMan {
         this.x = startX;
         this.y = startY;
         this.grid = grid;
-        this.direction = Direction.UP; // Default direction
+        this.direction = Direction.DOWN; // Default direction
         this.moveFrequency = 9; // Adjust this value to change speed
     }
 
@@ -80,13 +80,6 @@ public class PacMan {
         if (dot != null && !dot.isEaten()) {
             dot.eat();
             scoreIncrement = 1;
-        }
-
-        PowerPellet powerPellet = grid.getPowerPellet(x, y);
-        if (powerPellet != null && !powerPellet.isEaten()) {
-            powerPellet.eat();
-            scoreIncrement = 3;
-            // Handle power pellet effect
         }
 
         return scoreIncrement;
