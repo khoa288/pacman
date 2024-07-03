@@ -68,6 +68,9 @@ public class Ghost {
                 x = nextMove[0];
                 y = nextMove[1];
             }
+            else (if path == null) {
+                moveNormalMode();
+            }
         }
     }
 
