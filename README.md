@@ -28,3 +28,11 @@ Then, the project is ready to be run with:
 
 ### Notes
 Please follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification while commit.
+
+## Project Overview
+### Architecture
+Our game follows the Model-View-Controller architecture, and this is the UML Class Diagram for our project:
+![Class Diagram](./doc/classDiagram.png)
+
+### Demo
+![Demo Video](./doc/demoVideo.gif)
